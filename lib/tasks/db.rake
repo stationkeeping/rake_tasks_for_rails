@@ -19,8 +19,8 @@ namespace :db do
     client = DropboxClient.new(ENV["DROPBOX_ACCESS_TOKEN"])
     file = open(dump_path)
     response = client.put_file(dump_public_path, file, true)
-    puts "Uploaded:", response.inspect
     dump_public_url = client.media(dump_public_path)["url"]
+    puts "Uploaded dump to #{dump_public_url}"
     puts "Restoring database to staging ..."
     `heroku pgbackups:restore DATABASE #{dump_public_url} --confirm #{staging_app_name}`
     puts "Done"
@@ -30,7 +30,7 @@ namespace :db do
   task :rebuild => [:environment, "db:kill", "db:drop", "db:create", "db:migrate", "db:seed"]
 
   desc "Kill Postgres connections, Drop, create then migrate the database with RAILS_ENV=test"
-  task :rebuild_test => :environment, "db:set_test_environment", "db:kill", "db:drop", "db:create", "db:migrate"]
+  task :rebuild_test => [:environment, "db:set_test_environment", "db:kill", "db:drop", "db:create", "db:migrate"]
 
   desc "Kill all Postgres connections"
   task :kill => :environment do
