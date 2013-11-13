@@ -1,29 +1,14 @@
 # RakeTasksForRails
 
-TODO: Write a gem description
+Simple Rake tasks to help with Rails development using Postgres and Heroku
 
 ## Installation
 
-Add this line to your application's Gemfile:
+1. Clone the repo.
 
-    gem 'rake_tasks_for_rails'
+2. Add the following to your Gemfile:
 
-And then execute:
+```
+gem "rake_tasks_for_rails", local: "path/to/cloned/rake_tasks_for_rails"
+```
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rake_tasks_for_rails
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
