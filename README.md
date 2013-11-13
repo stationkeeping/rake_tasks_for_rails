@@ -9,6 +9,6 @@ Simple Rake tasks to help with Rails development using Postgres and Heroku
 2. Add the following to your Gemfile:
 
 ```
-gem "rake_tasks_for_rails", local: "path/to/cloned/rake_tasks_for_rails"
+gem "rake_tasks_for_rails", path: "path/to/cloned/rake_tasks_for_rails"
 ```
 
