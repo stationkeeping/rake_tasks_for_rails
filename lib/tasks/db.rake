@@ -14,7 +14,7 @@ namespace :db do
     puts "Dumping database to #{dump_public_path}"
     `mkdir -p #{File.expand_path(dump_dir)}`
     `rm #{dump_path}`
-    `pg_dump -Fc --no-acl --no-owner -h localhost -U $(whoami) #{db_name}_development > #{dump_path}`
+    `pg_dump -Fc --no-acl --no-owner -h localhost -U $(whoami) #{db_name} > #{dump_path}`
     # Upload to Dropbox
     puts "Uploading to Dropbox ..."
     client = DropboxClient.new(ENV["DROPBOX_ACCESS_TOKEN"])
