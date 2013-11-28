@@ -12,6 +12,8 @@ namespace :app do
     end
     puts "Pushing changes ..."
     `git push staging master`
+    puts "Running Migrations ..."
+    'heroku run rake db:migrate'
     puts "Done"
   end
 
