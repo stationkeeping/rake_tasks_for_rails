@@ -22,7 +22,7 @@ module RakeTasksForRails
     end
 
     def development_database_name
-      ENV["DEVELOPMENT_DATABASE_NAME"} || "#{File.basename(Rails.root)}_development"
+      ENV["DEVELOPMENT_DATABASE_NAME"] || "#{File.basename(Rails.root)}_development"
     end
 
     def dropbox_access_token
