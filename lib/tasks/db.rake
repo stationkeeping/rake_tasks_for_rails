@@ -4,8 +4,7 @@ namespace :db do
 
   desc "Dump development database, upload to Dropbox and restore staging from it"
   task :push => :environment do
-    db_name = db_name = "#{ENV["DEVELOPMENT_DATABASE_ROOTNAME"] || File.basename(Rails.root)}_development"
-    db_file = "#{db_name}.dump"
+    db_file = "#{RakeTasksForRails::Config.development_database_name}.dump"
     dump_dir = "tmp/db"
     dump_path = File.expand_path(File.join(dump_dir, db_file))
     dump_public_path = "public/tmp/db/#{db_file}"
@@ -14,7 +13,7 @@ namespace :db do
     puts "Dumping database to #{dump_public_path}"
     `mkdir -p #{File.expand_path(dump_dir)}`
     `rm #{dump_path}`
-    `pg_dump -Fc --no-acl --no-owner -h localhost -U $(whoami) #{db_name} > #{dump_path}`
+    `pg_dump -Fc --no-acl --no-owner -h localhost -U $(whoami) #{RakeTasksForRails::Config.development_database_name} > #{dump_path}`
     # Upload to Dropbox
     puts "Uploading to Dropbox ..."
     client = DropboxClient.new(ENV["DROPBOX_ACCESS_TOKEN"])
@@ -23,7 +22,7 @@ namespace :db do
     dump_public_url = client.media(dump_public_path)["url"]
     puts "Uploaded dump to #{dump_public_url}"
     puts "Restoring database to staging ..."
-    `heroku pgbackups:restore DATABASE #{dump_public_url} --confirm #{staging_app_name}`
+    `heroku pgbackups:restore DATABASE #{dump_public_url} --confirm #{RakeTasksForRails::Config.staging_app_name}`
     puts "Done"
   end
 
@@ -35,11 +34,10 @@ namespace :db do
 
   desc "Kill all Postgres connections"
   task :kill => :environment do
-    db_name = "#{File.basename(Rails.root)}_#{Rails.env}"
     sh = <<EOF
 ps xa \
 | grep postgres: \
-| grep #{db_name} \
+| grep #{RakeTasksForRails::Config.development_database_name} \
 | grep -v grep \
 | awk '{print $1}' \
 | xargs kill
