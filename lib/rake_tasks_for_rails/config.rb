@@ -2,6 +2,10 @@ module RakeTasksForRails
 
   module Config
 
+    DEVELOPMENT_ENVIRONMENT = "development"
+    STAGING_ENVIRONMENT = "staging"
+    PRODUCTION_ENVIRONMENT = "production"
+
     def self.app_name
       File.basename(Rails.root)
     end

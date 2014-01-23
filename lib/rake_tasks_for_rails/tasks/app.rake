@@ -1,20 +1,7 @@
 require 'rake_tasks_for_rails/config'
 require 'rake_tasks_for_rails/assets'
-require 'rake_tasks_for_rails/envs'
 
 namespace :app do
-
-  namespace :envs do
-
-    task :staging do
-      RakeTasksForRails::Envs.push(RakeTasksForRails::Config.staging_app_name, RakeTasksForRails::Config.staging_remote)
-    end
-
-    task :production do
-      RakeTasksForRails::Envs.push(RakeTasksForRails::Config.production_app_name, RakeTasksForRails::Config.production_remote)
-    end
-
-  end
 
   namespace :push do
 
