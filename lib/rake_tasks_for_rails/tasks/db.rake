@@ -13,6 +13,7 @@ namespace :db do
 
     desc "Dump development database, upload to Dropbox and restore production database from it"
     task :production => :environment do
+      Rake::Task['shared:confirm'].invoke("Restore production database from development", RakeTasksForRails::Config.production_app_name)
       RakeTasksForRails::DB.push(RakeTasksForRails::Config.production_app_name)
     end
 
