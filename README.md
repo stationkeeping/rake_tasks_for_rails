@@ -6,13 +6,13 @@ Simple Rake tasks to help with Rails development using Postgres and Heroku.
 
 Wherever possible, tasks use sensible defaults which can be overridden using environmental variables. Note: `app_name` is taken from your Rails application name:
 
-- ENV["HEROKU_STAGING_APP_NAME"] - Default: "#{app_name}-staging"
-- ENV["HEROKU_PRODUCTION_APP_NAME"] - Default: "#{app_name}-production"
-- ENV["REMOTE_STAGING_NAME"] - Default: "staging"
-- ENV["REMOTE_PRODUCTION_NAME"] - Default: "production"
-- ENV["DEVELOPMENT_DATABASE_NAME"] - Default: "#{app_name}_development"
-- ENV["DROPBOX_ACCESS_TOKEN"] - Default: This will cause an exception to be raised if missing
-- ENV["ASSET_HASH_DIRNAME"] - Default: "tmp". *Note: this is the location of the file used to track changes to assets and used to determine whether precompilation is necessary.*
+- `ENV["HEROKU_STAGING_APP_NAME"]` - Default: "#{app_name}-staging"
+- `ENV["HEROKU_PRODUCTION_APP_NAME"]` - Default: "#{app_name}-production"
+- `ENV["REMOTE_STAGING_NAME"]` - Default: "staging"
+- `ENV["REMOTE_PRODUCTION_NAME"]` - Default: "production"
+- `ENV["DEVELOPMENT_DATABASE_NAME"]` - Default: "#{app_name}_development"
+- `ENV["DROPBOX_ACCESS_TOKEN"]` - Default: This will cause an exception to be raised if missing
+- `ENV["ASSET_HASH_DIRNAME"]` - Default: "tmp". *Note: this is the location of the file used to track changes to assets and used to determine whether precompilation is necessary.*
 
 
 Tasks are broken into three groups:
