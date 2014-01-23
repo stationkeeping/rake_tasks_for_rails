@@ -35,7 +35,7 @@ module RakeTasksForRails
     end
 
     def self.asset_hash_dirname
-      ENV["ASSET_HASH_FILE_PATH"] || "tmp"
+      ENV["ASSET_HASH_DIRNAME"] || "tmp"
     end
 
   end
