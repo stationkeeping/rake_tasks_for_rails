@@ -35,8 +35,7 @@ namespace :app do
 
   end
 
-  # See db:rebuid
-  desc "Rebuild locally from scratch"
-  task :rebuild => ["db:rebuild"]
+  desc "Default to 'app:push:staging'"
+  task :push => "app:push:staging"
 
 end

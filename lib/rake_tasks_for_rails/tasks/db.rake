@@ -18,7 +18,8 @@ namespace :db do
 
   end
 
-  task
+  desc "Default to 'db:push:staging'"
+  task :push => 'db:push:staging'
 
   namespace :rebuid do
 
@@ -29,6 +30,9 @@ namespace :db do
     task :test => [:environment, "db:set_test_environment", "db:kill", "db:drop", "db:create", "db:migrate"]
 
   end
+
+  desc "Default to 'db:rebuild:development'"
+  task :rebuild => 'db:rebuild:development'
 
   namespace :kill do
 
@@ -46,5 +50,8 @@ EOF
     end
 
   end
+
+  desc "Default to 'db:kill:development'"
+  task :kill => 'db:kill:development'
 
 end

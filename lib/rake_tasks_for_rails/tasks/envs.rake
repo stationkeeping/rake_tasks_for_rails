@@ -44,6 +44,4 @@ namespace :envs do
   desc "Default to 'envs:print:development'"
   task :print => 'envs:print:development'
 
-
-
 end
