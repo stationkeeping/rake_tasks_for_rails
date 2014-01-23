@@ -26,9 +26,6 @@ namespace :db do
     desc "Kill Development Postgres DB connections, drop, create, migrate then seed the database"
     task :development => [:environment, "db:kill", "db:drop", "db:create", "db:migrate", "db:seed"]
 
-    desc "Kill Postgres connections, Drop, create then migrate the database with RAILS_ENV=test"
-    task :test => [:environment, "db:set_test_environment", "db:kill", "db:drop", "db:create", "db:migrate"]
-
   end
 
   desc "Default to 'db:rebuild:development'"
