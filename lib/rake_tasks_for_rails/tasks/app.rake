@@ -8,20 +8,22 @@ namespace :app do
     desc "Push to Heroku staging app"
     task :staging  => :environment do
       Rake::Task['app:push:implementation'].invoke(RakeTasksForRails::Config.staging_app_name,
-        RakeTasksForRails::Config.staging_remote)
+        RakeTasksForRails::Config.staging_remote, RakeTasksForRails::Config::STAGING_ENVIRONMENT)
     end
 
     desc "Push to Production staging app"
     task :production  => :environment do
+      Rake::Task['shared:confirm'].invoke("Push application to production", RakeTasksForRails::Config.production_app_name)
       Rake::Task['app:push:implementation'].invoke(RakeTasksForRails::Config.production_app_name,
-        RakeTasksForRails::Config.production_remote)
+        RakeTasksForRails::Config.production_remote, RakeTasksForRails::Config::PRODUCTION_ENVIRONMENT)
     end
 
-    task :implementation, [:app_name, :remote]  => :environment do |t, args|
+    task :implementation, [:app_name, :remote, :environment]  => :environment do |t, args|
       puts "Checking for changes in `app/assets` ..."
       if RakeTasksForRails::Assets.assets_changed?(args[:app_name], args[:remote])
         puts "Changes detected. Precompiling assets"
-        Rake::Task['rake:assets:precompile'].invoke
+        # Set the appropriate environment before precompilation
+        `RAILS_ENV=#{args[:environment]} rake assets:precompile`
         puts "Comitting changes to 'public/assets/manifest'"
         `git add public/assets/manifest*.*`
         `git commit -m "Add updated asset manifest"`
