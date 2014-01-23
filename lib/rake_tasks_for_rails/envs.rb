@@ -21,17 +21,24 @@ module RakeTasksForRails
     /x
 
     def self.push(app_name, environment)
-      envs = {}
-      self.load(".env", envs) if File.exists?(".env")
-      environment_env_basename = ".env.#{environment}"
-      self.load(environment_env_basename, envs) if File.exists?(environment_env_basename)
-      puts "Pushing Envs: #{envs.inspect}"
+      puts "Pushing Envs for #{environment}"
+      envs = self.load_envs(environment)
       envs_string = envs.map{|key, value| "#{key}=#{value}"}.join(" ")
       `heroku config:set #{envs_string} -a #{app_name}`
       puts "Pushed Envs"
     end
 
-    def self.load(filename, envs)
+    def self.load_envs(environment)
+      envs = {}
+      self.load_file(".env", envs) if File.exists?(".env")
+      environment_env_basename = ".env.#{environment}"
+      self.load_file(environment_env_basename, envs) if File.exists?(environment_env_basename)
+      puts "Loaded envs for #{environment}:"
+      envs.each{|key, value| puts "   #{key}=#{value}"}
+      return envs
+    end
+
+    def self.load_file(filename, envs)
       puts "loading envs from #{filename}"
       File.read(filename).split("\n").each do|line|
 
