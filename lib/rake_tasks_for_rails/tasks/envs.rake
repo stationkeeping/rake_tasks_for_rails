@@ -8,7 +8,7 @@ namespace :envs do
     desc 'Add envs in .env and .env.staging to staging environment'
     task :staging do
       RakeTasksForRails::Envs.push(RakeTasksForRails::Config.staging_app_name,
-        RakeTasksForRails::Config::DEVELOPMENT_ENVIRONMENT)
+        RakeTasksForRails::Config::STAGING_ENVIRONMENT)
     end
 
     desc 'Add envs in .env and .env.production to production environment'
