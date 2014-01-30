@@ -25,7 +25,7 @@ namespace :db do
   namespace :rebuild do
 
     desc "Kill Development Postgres DB connections, drop, create, migrate then seed the database"
-    task :development => [:environment, "db:kill", "db:drop", "db:create", "db:migrate", "db:seed"]
+    task :development => [:environment, "db:kill", "db:drop", "db:create", "db:migrate", "db:seed", "db:test:clone"]
 
   end
 
