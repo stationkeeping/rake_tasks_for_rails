@@ -36,7 +36,7 @@ namespace :db do
 
     desc "Kill all Postgres connections"
     task :development => :environment do
-    puts "killing database #{RakeTasksForRails::Config.development_database_name} …"
+      puts "killing database #{RakeTasksForRails::Config.development_database_name} …"
     sh = <<EOF
 ps xa \
 | grep postgres: \
