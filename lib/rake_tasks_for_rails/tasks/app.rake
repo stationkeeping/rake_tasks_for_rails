@@ -23,7 +23,7 @@ namespace :app do
       if RakeTasksForRails::Assets.assets_changed?(args[:app_name], args[:remote])
         puts "Changes detected. Precompiling assets"
         # Set the appropriate environment before precompilation
-        system("RAILS_ENV=#{args[:environment]} rake app:push:force_precompile")
+        system("RAILS_ENV=#{args[:environment]} rake assets:precompile --trace")
         puts "Comitting changes to 'public/assets/manifest'"
         `git add public/assets/manifest*.*`
         `git commit -m "Add updated asset manifest"`
@@ -31,15 +31,8 @@ namespace :app do
       puts "Pushing changes ..."
       `git push #{args[:remote]} master`
       puts "Running Migrations ..."
-      `heroku run rake db:migrate -a #{:app_name}`
+      `heroku run rake db:migrate -a #{args[:app_name]}`
       puts "Done"
-    end
-
-    # By wrapping rake assets:precompile in a separate task with a dependency on environment we
-    # force it to reload the environment
-    desc "Force precompile in given environment"
-    task :force_precompile => :environment do
-      system("rake assets:precompile --trace")
     end
 
   end

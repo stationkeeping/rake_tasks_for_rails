@@ -23,13 +23,10 @@ namespace :db do
   task :push => 'db:push:staging'
 
   namespace :rebuild do
-
     desc "Kill Development Postgres DB connections, drop, create, migrate then seed the database"
     task :development => [:environment, "db:kill", "db:drop", "db:create", "db:migrate", "db:seed", "db:test:clone"]
-
   end
 
-  desc "Default to 'db:rebuild:development'"
   task :rebuild => 'db:rebuild:development'
 
   namespace :kill do
